@@ -39,38 +39,43 @@ Admin - Products
         <div class="row">
             <div class="col-md-8">
                 <h3>Manage Products</h3>
-                <form name="manageProduct" id="productForm" novalidate>
+
+
+                <form name="manageProduct" id="productForm" method="post" action="/products">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Title</label>
-                            <input type="text" class="form-control" id="title" required data-validation-required-message="Title of the product">
+                            <input type="text" class="form-control" id="title" name="title" required data-validation-required-message="Title of the product">
                             <p class="help-block"></p>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Description</label>
-                            <textarea rows="10" cols="100" class="form-control" id="description" required data-validation-required-message="Describe the product" maxlength="999" style="resize:none"></textarea>
+                            <textarea rows="10" cols="100" class="form-control" id="description" name="description" required data-validation-required-message="Describe the product" maxlength="999" style="resize:none"></textarea>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Price</label>
-                            <input type="tel" class="form-control" id="price" required data-validation-required-message="Price of the product">
+                            <input type="tel" class="form-control" id="price" name="price" required data-validation-required-message="Price of the product">
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Product image</label>
-                            <input type="email" class="form-control" id="img" required data-validation-required-message="image name, like 'node.jpg' ">
+                            <input type="email" class="form-control" id="img" name="image" required data-validation-required-message="image name, like 'node.jpg' ">
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Product teaser URL</label>
-                            <input type="email" class="form-control" id="url" required data-validation-required-message="Put the product trailer URL ">
+                            <input type="email" class="form-control" id="url" name="teaserUrl" required data-validation-required-message="Put the product trailer URL ">
                         </div>
                     </div>
+
+                    <input type="hidden" name="_csrf" value="{_csrf}">
+
                     <div id="success"></div>
                     <!-- For success/fail messages -->
                     <button type="submit" class="btn btn-primary">Send Message</button>
@@ -79,6 +84,34 @@ Admin - Products
 
         </div>
         <!-- /.row -->
+        <hr>
+        <div class="products">
+            {?products}
+                <fieldset>
+                    <legend>Product List</legend>
+                    <ul class="nm-np inline">
+                        {#products}
+                            <li>
+                                <form method="POST" action="/products">
+                                    <input type="hidden" name="item_id" value="{.id}">
+
+                                    <h3 class="nm-np">{.name}</h3>
+                                    <h4 class="nm-np">{.prettyPrice}</h4>
+
+                                    <input type="submit" value="Delete">
+                                    <!--If we don't at the Cross-Site Request Forgey token, this POST will be rejected-->
+                                    <input type="hidden" name="_csrf" value="{_csrf}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                </form>
+                            </li>
+                        {/products}
+                    </ul>
+                </fieldset>
+            {:else}
+                There are no products :(
+            {/products}
+        </div>
+
         <hr>
 
         <!-- Footer -->

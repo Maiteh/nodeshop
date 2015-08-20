@@ -33,8 +33,10 @@ module.exports = function (router) {
 	 * **** PLEASE READ THE COMMENT BELOW! ****
 	 */
 	router.post('/', function (req, res) {
-		var name = req.body.name && req.body.name.trim();
-
+		var title = req.body.title && req.body.title.trim();
+		var description = req.body.description && req.body.description.trim();
+		var image = req.body.image && req.body.image.trim();
+		var url = req.body.url && req.body.url.trim();
 		//***** PLEASE READ THIS COMMENT ******\\\
 		/*
 		 Using floating point numbers to represent currency is a *BAD* idea \\
@@ -52,12 +54,12 @@ module.exports = function (router) {
 		var price = parseFloat(req.body.price, 10);
 
 		//Some very lightweight input checking
-		if (name === '' || isNaN(price)) {
+		if (title === '' || isNaN(price)) {
 			res.redirect('/products#BadInput');
 			return;
 		}
 
-		var newProduct = new Product({name: name, price: price});
+		var newProduct = new Product({title: title, price: price});
 
 		//Show it in console for educational purposes...
 		newProduct.whatAmI();

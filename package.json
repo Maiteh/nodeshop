@@ -14,9 +14,6 @@
     "examples"
   ],
   "author": "Maiteh",
-  "scripts": {
-    "start": "node server.js"
-  },
   "license": "Apache 2.0",
   "dependencies": {
     "kraken-js": "^1.0.1",
