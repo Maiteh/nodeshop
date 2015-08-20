@@ -69,10 +69,10 @@ module.exports = function (router) {
 			}
 			else {
 				cart[id] = {
-					name: prod.name,
+					title: prod.title,
 					price: prod.price,
 					prettyPrice: prod.prettyPrice(),
-					qty: 1
+					qty: req.body.qty && req.body.qty
 				};
 			}
 

@@ -27,33 +27,40 @@ module.exports = function (router) {
 
 	});
 
-
+/* saving image */
+router.post('/upload', function (req, res) {
+    var tempPath = req.files.file.path,
+        targetPath = path.resolve('./uploads/image.png');
+    if (path.extname(req.files.file.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function(err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+        });
+    } else {
+        fs.unlink(tempPath, function () {
+            if (err) throw err;
+            console.error("Only .png files are allowed!");
+        });
+    }
+    // ...
+});
 	/**
 	 * Add a new product to the database.
-	 * **** PLEASE READ THE COMMENT BELOW! ****
 	 */
 	router.post('/', function (req, res) {
-		var name = req.body.name && req.body.name.trim();
+		var title = req.body.title && req.body.title.trim();
 		var description = req.body.description && req.body.description.trim();
 		var image = req.body.image && req.body.image.trim();
-		//***** PLEASE READ THIS COMMENT ******\\\
 		/*
-		 Using floating point numbers to represent currency is a *BAD* idea \\
-
-		 You should be using arbitrary precision libraries like:
-		 https://github.com/justmoon/node-bignum instead.
-
-		 So why am I not using it here? At the time of this writing, bignum is tricky to install
-		 on Windows-based systems. I opted to make this example accessible to more people, instead
-		 of making it mathematically correct.
-
-		 I would strongly advise against using this code in production.
-		 You've been warned!
+		deze Code wordt normaal streng afgeraden te gebruiken, maar de tutorial die ik volgde melde 
+		erbij dat toen deze werdt geschreven de betere oplossing nog niet echt op punt stond, 
+		Daarom werdt deze toch toegepast om zo veel mogelijk mensen te kunnen helpen
+		De code werkt, maar is niet veilig in productie
 		 */
 		var price = parseFloat(req.body.price, 10);
 
 		//Some very lightweight input checking
-		if (name === '' || isNaN(price)) {
+		if (title === '' || isNaN(price)) {
 			res.redirect('/products#BadInput');
 			return;
 		}

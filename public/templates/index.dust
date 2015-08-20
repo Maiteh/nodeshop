@@ -44,22 +44,29 @@ Node Webshop
 
             <!-- Hier beginnen we een loop om te zien of er producten zijn, zo ja lezen we deze uit -->
             {#products}
-            <div class="col-md-4 col-sm-6 product-item">
-                <form method="POST" action="cart">
+
+            <div class="col-md-4">
+            <form method="POST" action="cart">
                     <input type="hidden" name="item_id" value="{.id}">
-                    <h3 class="nm-np">{.title}</h3>
-                    <h4 class="nm-np">{.prettyPrice}</h4>
-                    <button type="submit" class="btn btn-primary" value="{@pre type="content" key="addToCart"/}">Add To Cart</button>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-fw fa-check"></i> {.title}</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>{.description}</p>
+                        <h4>{.prettyPrice}</h4>
+                        <input type="text" class="form-control sml" id="qty" name="qty" required value="1">
+                        <button type="submit" class="btn btn-primary" value="{@pre type="content" key="addToCart"/}">Add To Cart</button>
                             <!--If we don't add the Cross-Site Request Forgery token, this POST will be rejected-->
                             <input type="hidden" name="_csrf" value="{_csrf}">
+                    </div>
+                </div>
                 </form>
-                
             </div>
             <!-- Einde van de loop -->
         {:else}
                     <li>There are no products :(<br>You should <a href="/products">add some</a></li>
-                {/products}
-        </div>
+        {/products}
 
         
         <!-- /.row -->

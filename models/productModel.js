@@ -14,9 +14,9 @@ var productModel = function () {
 
     //Verbose toString method
     productSchema.methods.whatAmI = function () {
-        var greeting = this.name ?
-            'Hello, I\'m a ' + this.name + ' and I\'m worth ' + this.prettyPrice()
-            : 'I don\'t have a name :(';
+        var greeting = this.title ?
+            'Hello, I\'m a ' + this.title + ' and I\'m worth ' + this.prettyPrice()
+            : 'I don\'t have a title :(';
     };
 
     //Format the price of the product to show a dollar sign, and two decimal places
