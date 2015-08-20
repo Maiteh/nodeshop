@@ -95,7 +95,7 @@ module.exports = function (router) {
 	 */
 	router.put('/', function (req, res) {
 		console.log('PUT received. Ignoring.');
-		res.redirect('/products');
+		res.redirect('/products/:id');
 	});
 
 };
