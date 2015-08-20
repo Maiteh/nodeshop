@@ -1,0 +1,95 @@
+{>"layouts/master" /}
+{<title}
+Admin - Products
+{/title}
+{<body}
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/overons">About</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="container">
+    <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Manage Products</h3>
+                <form name="manageProduct" id="productForm" novalidate>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Title</label>
+                            <input type="text" class="form-control" id="title" required data-validation-required-message="Title of the product">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Description</label>
+                            <textarea rows="10" cols="100" class="form-control" id="description" required data-validation-required-message="Describe the product" maxlength="999" style="resize:none"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Price</label>
+                            <input type="tel" class="form-control" id="price" required data-validation-required-message="Price of the product">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Product image</label>
+                            <input type="email" class="form-control" id="img" required data-validation-required-message="image name, like 'node.jpg' ">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Product teaser URL</label>
+                            <input type="email" class="form-control" id="url" required data-validation-required-message="Put the product trailer URL ">
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+{/body}
