@@ -80,7 +80,7 @@ Admin - Products
 
                     <div id="success"></div>
                     <!-- For success/fail messages -->
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary">Add new product</button>
                 </form>
             </div>
 
@@ -97,11 +97,12 @@ Admin - Products
                                 <form method="POST" action="/products">
                                     <input type="hidden" name="item_id" value="{.id}">
 
-                                    <h3 class="nm-np">{.name}</h3>
+                                    <h3 class="nm-np">{.title}</h3>
                                     <h4 class="nm-np">{.prettyPrice}</h4>
 
-                                    <a href="#" class="btn btn-default">Delete</a>
-                                    <a href="/products/{.id}" class="btn btn-primary">Edit</a>
+                                    <!-- <a href="#" class="btn btn-default">Delete</a>
+                                    <a href="/products/{.id}" class="btn btn-primary">Edit</a> -->
+
                                     <!--If we don't at the Cross-Site Request Forgey token, this POST will be rejected-->
                                     <input type="hidden" name="_csrf" value="{_csrf}">
                                     <input type="hidden" name="_method" value="DELETE">

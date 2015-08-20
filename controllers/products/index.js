@@ -36,7 +36,7 @@ module.exports = function (router) {
 		var title = req.body.title && req.body.title.trim();
 		var description = req.body.description && req.body.description.trim();
 		var image = req.body.image && req.body.image.trim();
-		var url = req.body.url && req.body.url.trim();
+		var teaserurl = req.body.teaserurl && req.body.teaserurl.trim();
 		//***** PLEASE READ THIS COMMENT ******\\\
 		/*
 		 Using floating point numbers to represent currency is a *BAD* idea \\
@@ -59,7 +59,7 @@ module.exports = function (router) {
 			return;
 		}
 
-		var newProduct = new Product({title: title, price: price});
+		var newProduct = new Product({title: title, description: description, price: price, image: image, teaserurl: teaserurl });
 
 		//Show it in console for educational purposes...
 		newProduct.whatAmI();
@@ -79,7 +79,7 @@ module.exports = function (router) {
 	 * Delete a product.
 	 * @paaram: req.body.item_id Is the unique id of the product to remove.
 	 */
-	router.delete('/', function (req, res) {
+	router.delete('/products', function (req, res) {
 		Product.remove({_id: req.body.item_id}, function (err) {
 			if (err) {
 				console.log('Remove error: ', err);
@@ -95,7 +95,7 @@ module.exports = function (router) {
 	 */
 	router.put('/', function (req, res) {
 		console.log('PUT received. Ignoring.');
-		res.redirect('/products/:id');
+		//res.redirect('/products/' + {product.id});
 	});
 
 };
