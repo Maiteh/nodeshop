@@ -41,7 +41,7 @@ Admin - Products
                 <h3>Manage Products</h3>
 
 
-                <form name="manageProduct" id="productForm" method="post" action="/products">
+                <form name="manageProduct" id="productForm" enctype="multipart/form-data" method="post" action="/products">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Title</label>
@@ -64,13 +64,7 @@ Admin - Products
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Product image</label>
-                            <input type="email" class="form-control" id="img" name="image" required data-validation-required-message="image name, like 'node.jpg' ">
-                        </div>
-                    </div>
-                    <div class="control-group form-group">
-                        <div class="controls">
-                            <label>Product teaser URL</label>
-                            <input type="email" class="form-control" id="url" name="teaserUrl" required data-validation-required-message="Put the product trailer URL ">
+                            <input type="file" class="form-control" id="img" name="image" required data-validation-required-message="image name, like 'node.jpg' ">
                         </div>
                     </div>
 

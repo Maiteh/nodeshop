@@ -10,7 +10,6 @@ var productModel = function () {
         description: String,
         price: Number,
         image: String,
-        url: String,
     });
 
     //Verbose toString method

@@ -49,7 +49,7 @@ Node Webshop
                     <input type="hidden" name="item_id" value="{.id}">
                     <h3 class="nm-np">{.title}</h3>
                     <h4 class="nm-np">{.prettyPrice}</h4>
-                    <input type="submit" value="{@pre type="content" key="addToCart"/}">
+                    <button type="submit" class="btn btn-primary" value="{@pre type="content" key="addToCart"/}">Add To Cart</button>
                             <!--If we don't add the Cross-Site Request Forgery token, this POST will be rejected-->
                             <input type="hidden" name="_csrf" value="{_csrf}">
                 </form>
