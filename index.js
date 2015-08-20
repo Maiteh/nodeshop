@@ -2,6 +2,7 @@
 
 var express = require('express');
 var kraken = require('kraken-js');
+var db = require('./lib/db');
 
 
 var options, app;

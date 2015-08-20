@@ -1,17 +1,14 @@
 'use strict';
 
-var app = require('./index');
-var http = require('http');
+
+var kraken = require('kraken-js'),
+    app = require('express')(),
+    options = require('./lib/spec')(),
+    port = process.env.PORT || 8000;
 
 
-var server;
+app.use(kraken(options));
 
-/*
- * Create and start HTTP server.
- */
-
-server = http.createServer(app);
-server.listen(process.env.PORT || 8000);
-server.on('listening', function () {
-    console.log('Server listening on http://localhost:%d', this.address().port);
+app.listen(port, function (err) {
+    console.log('[%s] Listening on http://localhost:%d', app.settings.env, port);
 });

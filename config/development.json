@@ -1,52 +1,50 @@
 {
-    
+
     "express": {
         "view cache": false,
         "view engine": "dust",
         "views": "path:./public/templates"
     },
 
-    
     "view engines": {
         "dust": {
-            "module": "makara",
+            "module": "engine-munger",
             "renderer": {
                 "method": "dust",
                 "arguments": [
-                    { "cache": true, "helpers": "config:dust.helpers" }
+                    { "cache": false },
+                    {
+                        "views": "config:express.views",
+                        "view engine": "config:express.view engine",
+                        "i18n": "config:i18n"
+                    }
                 ]
             }
         }
     },
-    
-    
-
     "middleware": {
 
         "devtools": {
             "enabled": true,
             "priority": 35,
             "module": {
-                "name": "construx",
+                "name": "kraken-devtools",
                 "arguments": [
                     "path:./public",
                     "path:./.build",
                     {
-                        
-                        "template": {
-                            "module": "construx-dustjs",
+                        "dust": {
+                            "module": "kraken-devtools/plugins/dustjs",
                             "files": "/templates/**/*.js",
-                            "base": "templates"
+                            "base": "templates",
+                            "i18n": "config:i18n"
                         },
-                        
-                        
-                        "css": {
-                            "module": "construx-sass",
+                        "less": {
+                            "module": "kraken-devtools/plugins/less",
                             "files": "/css/**/*.css"
                         },
-                        
                         "copier": {
-                            "module": "construx-copier",
+                            "module": "kraken-devtools/plugins/copier",
                             "files": "**/*"
                         }
                     }
@@ -54,4 +52,5 @@
             }
         }
     }
+
 }
