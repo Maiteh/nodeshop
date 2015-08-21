@@ -3,6 +3,6 @@
 
 module.exports = function CartModel() {
     return {
-        name: 'kraken-example-shopping-cart'
+        name: 'Cart'
     };
 };

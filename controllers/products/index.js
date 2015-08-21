@@ -1,14 +1,10 @@
-/**
- * A very simple product editor
- */
+
 'use strict';
 var Product = require('../../models/productModel');
 
 module.exports = function (router) {
 
-	/**
-	 * Retrieve a list of all products for editing.
-	 */
+	//lijst binnehalen
 	router.get('/', function (req, res) {
 
 		Product.find(function (err, prods) {
@@ -27,7 +23,7 @@ module.exports = function (router) {
 
 	});
 
-/* saving image */
+/* Afbeelding opstaal */
 router.post('/upload', function (req, res) {
     var tempPath = req.files.file.path,
         targetPath = path.resolve('./uploads/image.png');
@@ -39,13 +35,13 @@ router.post('/upload', function (req, res) {
     } else {
         fs.unlink(tempPath, function () {
             if (err) throw err;
-            console.error("Only .png files are allowed!");
+            console.error("Only PNG");
         });
     }
     // ...
 });
-	/**
-	 * Add a new product to the database.
+	/* 
+		Database opslaan
 	 */
 	router.post('/', function (req, res) {
 		var title = req.body.title && req.body.title.trim();
@@ -59,7 +55,7 @@ router.post('/upload', function (req, res) {
 		 */
 		var price = parseFloat(req.body.price, 10);
 
-		//Some very lightweight input checking
+		//input checking
 		if (title === '' || isNaN(price)) {
 			res.redirect('/products#BadInput');
 			return;
@@ -67,7 +63,7 @@ router.post('/upload', function (req, res) {
 
 		var newProduct = new Product({title: title, description: description, price: price, image: image});
 
-		//Show it in console for educational purposes...
+		//in console tonen voor handigheid
 		newProduct.whatAmI();
 		/* The call back recieves to more arguments ->product/s that is/are added to the database
 		 and number of rows that are affected because of save, which right now are ignored
@@ -79,29 +75,6 @@ router.post('/upload', function (req, res) {
 
 			res.redirect('/products');
 		});
-	});
-
-	/**
-	 * Delete a product.
-	 * @paaram: req.body.item_id Is the unique id of the product to remove.
-	 */
-	router.delete('/', function (req, res) {
-		Product.remove({_id: req.body.item_id}, function (err) {
-			if (err) {
-				console.log('Remove error: ', err);
-			}
-			res.redirect('/products');
-		});
-	});
-
-
-	/**
-	 * Edit a product.
-	 * Not implemented here
-	 */
-	router.put('/', function (req, res) {
-		console.log('PUT received. Ignoring.');
-		res.redirect('/products');
 	});
 
 };

@@ -5,16 +5,12 @@ var getBundle = require('../../lib/getBundle');
 
 module.exports = function (router) {
 
-
-
-
-	
-	/**
-	 * Send information to PayPal
+	/*
+	 Informatie naar paypal sturen
 	 */
 	router.post('/', getBundle, function (req, res) {
 
-		//Read the incoming product data
+		//inkomend uitleze
 		var cc = req.param('cc');
 		var firstName = req.param('firstName');
 		var lastName = req.param('lastName');
@@ -25,10 +21,12 @@ module.exports = function (router) {
 		var i18n = res.app.kraken.get('i18n');
 		var locality = locals && locals.context && locals.context.locality || i18n.fallback;
 
-		//Ready the payment information to pass to the PayPal library
-		var payment = {
+		//betalingsgegevens klaar om te versturen na paypay
+		var payment = 
+		{
 			'intent': 'sale',
-			'payer': {
+			'payer': 
+			{
 				'payment_method': 'credit_card',
 				'funding_instruments': []
 			},
@@ -53,28 +51,34 @@ module.exports = function (router) {
 		};
 
 		//Set the total to charge the customer
-		payment.transactions[0] = {
-			amount: {
+		payment.transactions[0] = 
+		{
+			amount: 
+			{
 				total: req.session.total,
-				currency: 'USD'
+				currency: 'EUR'
 			},
-			description: 'Your Kraken Store Purchase'
+			description: 'District 01 Webshop aankoop'
 		};
 
 		//Execute the payment.
 		paypal.payment.create(payment, {}, function (err, resp) {
-			if (err) {
+			if (err) 
+			{
 				console.log(err);
-				res.bundle.get({'bundle': 'messages', 'model': {}, 'locality': locality}, function bundleReturn(err, messages) {
+				res.bundle.get({'bundle': 'messages', 'model': {}, 'locality': locality}, function bundleReturn(err, messages) 
+				{
 					res.render('result', {'result': messages.paymentError, 'continueMessage': messages.tryAgain});
 				});
 				return;
 			}
 
-			if (resp) {
+			if (resp) 
+			{
 				delete req.session.cart;
 				delete req.session.displayCart;
-				res.bundle.get({'bundle': 'messages', 'model': {}, 'locality': locality}, function bundleReturn(err, messages) {
+				res.bundle.get({'bundle': 'messages', 'model': {}, 'locality': locality}, function bundleReturn(err, messages) 
+				{
 					res.render('result', {'result': messages.paymentSuccess, 'continueMessage': messages.keepShopping});
 				});
 			}
